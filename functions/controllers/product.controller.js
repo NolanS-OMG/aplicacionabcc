@@ -28,6 +28,16 @@ exports.darAlta = async (req, res) => {
   }
 }
 
+exports.darAltaExistente = async (req, res) => {
+  const { sku } = req.body;
+  try {
+    const product = await productServices.darAltaExistente(sku);
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+}
+
 exports.darBaja = async (req, res) => {
   const { sku } = req.body;
   try {

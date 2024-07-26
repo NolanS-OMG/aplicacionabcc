@@ -21,6 +21,20 @@ exports.darAlta = async (data) => {
   }
 };
 
+exports.darAltaExistente = async (sku) => {
+  try {
+    const product = await this.encuentraProductoPorSku(sku);
+    product.descontinuado = false;
+    product.fechaAlta = Date.now();
+
+    const updatedProduct = await product.save();
+    return updatedProduct;
+  } catch (error) {
+    console.log('Error dando de alta un producto: ' + error.message);
+    throw new Error('Error dando de alta un producto: ' + error.message);
+  }
+};
+
 exports.darBaja = async (sku) => {
   try {
     const product = await this.encuentraProductoPorSku(sku);
