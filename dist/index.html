@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles.css">
+  <title>App ABCC</title>
+</head>
+
+<body>
+  <h1>Aplicación <strong>ABCC</strong>
+    (<strong class="type02">A</strong>lta-<strong class="type02">B</strong>aja-<strong
+      class="type02">C</strong>ambio-<strong class="type02">C</strong>onsulta)</h1>
+  <p>
+    El proyecto está creado <strong>principalmente</strong> en HTML, CSS, JavaScript, NodeJS y mongoDB.
+  </p>
+  <details>
+    <summary>¿Qué hace esta aplicación?</summary>
+    <p>
+      La aplicación da de Alta, da de Baja, realiza Cambios y Consultas de distintos artículos. <br>
+      Al dar la <strong>Alta</strong> de un artículo, si esté existe, simplemente pasa a dar su alta, si no, te permite
+      crearlo <br>
+      Al dar la <strong>Baja</strong> de un artículo, si esté existe, simplemente pasa a dar su baja, si no, no te
+      permite hacer nada <br>
+      Al hacer un <strong>Cambio</strong> de un artículo, si esté existe, simplemente pasa a dar revelar un formulario
+      paraa hacer sus cambios, si no, no te permite hacer nada <br>
+      Al hacer una <strong>Consulta</strong> de un artículo, si esté existe, simplemente pasa a mostralo, si no, no te
+      permite hacer nada
+    </p>
+  </details>
+  <details>
+    <summary>¿Por qué se utilizo ese Stack tecnológico?</summary>
+    <p>
+      La funcionalidad no requería una complejidad muy grande en la parte del front end ni del diseño, sin embargo,
+      por parte del back end, aún siendo sencillo, requería conectarlo con una base de datos (yo quise hacerlo), así
+      también,
+      puedo demostrar que se hacer todas las etapas de una aplicación, su arquitectura, su diseño, su lógica, su
+      despliegue, etcétera. <br> <br>
+      <strong>HTML, CSS y JavaScript</strong>: Los utilizo en el front end por ser la forma mas simple de crearlo. <br>
+      <strong>NodeJS y mongoDB</strong>: Los utilizo en el back end primero, mongoDB porque me permite utilizarlo en la
+      nube de una forma muy simple, tal que, su despliegue se me facilita, y NodeJS porque es la forma en la que mas
+      familiarizado estoy de conectarme a mongoDB, qunque se que con otros lenguajes y frameworks sigue siendo posible.
+    </p>
+  </details>
+  <div class="principal-form">
+    <p>Ingrese el valor del <strong>SKU</strong> (identificador del producto) y elija su acción (<strong>ABCC</strong>)
+    </p>
+
+    <form method="get" action="/.netlify/functions/api/product" id="skuForm" name="skuForm">
+      <label for="sku"><span>Sku:</span> <input form="skuForm" type="text" id="sku" name="sku" pattern="\d*"
+          title="Solo se permiten dígitos de 6 cifras o menos" maxlength="6" required></label>
+      <label for="action">
+        <span>Acción:</span>
+        <select form="skuForm" name="accion" id="accion" required>
+          <option value="alta">Alta</option>
+          <option value="baja">Baja</option>
+          <option value="cambio">Cambio</option>
+          <option value="consulta">Consulta</option>
+        </select>
+      </label>
+      <button type="submit" class="boton-principal boton-principal-02">Continuar</button>
+    </form>
+  </div>
+
+  <button id="crearTabla" class="boton-principal">Consultar Departamentos/Clases/Familias</button>
+  <div id="contenedorTabla"></div>
+
+  <div id="dialog">
+    <div></div>
+    <div></div>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+
+</html>

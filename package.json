@@ -1,0 +1,25 @@
+{
+  "name": "test-coppel",
+  "version": "1.0.0",
+  "description": "Aplicación ABCC (Alta-Baja-Cambio-Consulta)",
+  "main": "index.js",
+  "scripts": {
+    "test": "",
+    "start": "node functions/api.js",
+    "dev": "nodemon functions/api.js",
+    "net-dev": "netlify dev -d dist --debug",
+    "build": "netlify deploy -d dist --prod"
+  },
+  "author": "Nolan Ashcraft",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.5.1",
+    "nodemon": "^3.1.4",
+    "path": "^0.12.7",
+    "serverless-http": "^3.2.0"
+  }
+}
