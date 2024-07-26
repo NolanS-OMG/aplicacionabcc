@@ -251,6 +251,10 @@ const formAlta = async (sku) => {
     const stockAlta = document.getElementById("stockAlta");
     const cantidadAlta = document.getElementById("cantidadAlta");
 
+    cantidadAlta.addEventListener('input', () => {
+      cantidadAlta.setCustomValidity("");
+    });
+
     if (parseInt(cantidadAlta.value) > parseInt(stockAlta.value)) {
       cantidadAlta.setCustomValidity("La cantidad no puede ser mayor que el stock disponible.");
       cantidadAlta.reportValidity();
@@ -422,6 +426,10 @@ const formCambio = async (producto) => {
 
     const stockCambio = document.getElementById("stockCambio");
     const cantidadCambio = document.getElementById("cantidadCambio");
+
+    cantidadCambio.addEventListener('input', () => {
+      cantidadCambio.setCustomValidity("");
+    });
 
     if (parseInt(cantidadCambio.value) > parseInt(stockCambio.value)) {
       cantidadCambio.setCustomValidity("La cantidad no puede ser mayor que el stock disponible.");
