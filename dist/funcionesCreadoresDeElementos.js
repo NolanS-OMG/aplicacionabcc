@@ -188,6 +188,10 @@ const formAlta = async (sku, tabla) => {
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
+
+    const submitButton = form.children[form.children.length - 1];
+    submitButton.disabled = true;
+
     const formData = new FormData(event.target);
     const jsonFormData = Object.fromEntries(formData.entries());
 
@@ -201,6 +205,7 @@ const formAlta = async (sku, tabla) => {
     if (parseInt(cantidadAlta.value) > parseInt(stockAlta.value)) {
       cantidadAlta.setCustomValidity("La cantidad no puede ser mayor que el stock disponible.");
       cantidadAlta.reportValidity();
+      submitButton.disabled = false;
       return;
     }
 
@@ -219,6 +224,7 @@ const formAlta = async (sku, tabla) => {
       });
 
       if (!response.ok) {
+        submitButton.disabled = true;
         throw new Error('Error en la respuesta del servidor' + response.statusText);
       }
 
@@ -227,7 +233,9 @@ const formAlta = async (sku, tabla) => {
         dialog.children[1].innerHTML = "";
         dialog.children[1].append(mostrarProducto(result));
       }
+      submitButton.disabled = true;
     } catch (error) {
+      submitButton.disabled = true;
       console.error('There has been a problem with your fetch operation:', error);
     }
 
@@ -281,6 +289,9 @@ const formBaja = async (producto) => {
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
+    const submitButton = form.children[form.children.length - 1];
+    submitButton.disabled = true;
+
     try {
       const response = await fetch(event.target.action, {
         method: 'PUT',
@@ -291,6 +302,7 @@ const formBaja = async (producto) => {
       });
 
       if (!response.ok) {
+        submitButton.disabled = false;
         throw new Error('Error en la respuesta del servidor' + response.statusText);
       }
 
@@ -302,6 +314,7 @@ const formBaja = async (producto) => {
         dialog.children[1].innerHTML = "";
         dialog.children[1].append(mostrarMensaje(texto = "No se recibió respuesta, hubo un error"));
       }
+      submitButton.disabled = false;
     } catch (error) {
       console.error('There has been a problem with your fetch operation:', error);
     }
@@ -369,6 +382,10 @@ const formCambio = async (producto, tabla) => {
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
+
+    const submitButton = form.children[form.children.length - 1];
+    submitButton.disabled = true;
+
     const formData = new FormData(event.target);
     const jsonFormData = Object.fromEntries(formData.entries());
 
@@ -382,6 +399,7 @@ const formCambio = async (producto, tabla) => {
     if (parseInt(cantidadCambio.value) > parseInt(stockCambio.value)) {
       cantidadCambio.setCustomValidity("La cantidad no puede ser mayor que el stock disponible.");
       cantidadCambio.reportValidity();
+      submitButton.disabled = false;
       return;
     }
 
@@ -400,6 +418,7 @@ const formCambio = async (producto, tabla) => {
       });
 
       if (!response.ok) {
+        submitButton.disabled = false;
         throw new Error('Error en la respuesta del servidor' + response.statusText);
       }
 
@@ -411,6 +430,7 @@ const formCambio = async (producto, tabla) => {
         dialog.children[1].innerHTML = "";
         dialog.children[1].append(mostrarMensaje(texto = "No se recibió respuesta, hubo un error"));
       }
+      submitButton.disabled = false;
     } catch (error) {
       console.error('There has been a problem with your fetch operation:', error);
     }

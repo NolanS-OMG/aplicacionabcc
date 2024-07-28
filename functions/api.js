@@ -28,18 +28,18 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// app.use(express.static(path.join(__dirname, '../dist')));
+app.use(express.static(path.join(__dirname, '../dist')));
 
 app.use('/.netlify/functions/api', require("./routes"));
 
-// app.get('/', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../dist', 'index.html'));
-// });
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist', 'index.html'));
+});
 
 // Iniciar el servidor solo después de la conexión a la base de datos
-// app.listen(PORT, () => {
-//   console.log("Servidor funcionando en el puerto:", PORT);
-// });
+app.listen(PORT, () => {
+  console.log("Servidor funcionando en el puerto:", PORT);
+});
 
 const handler = serverless(app);
 module.exports.handler = async (event, context) => {

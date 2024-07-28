@@ -24,9 +24,14 @@ exports.darAlta = async (data) => {
 exports.darAltaExistente = async (sku) => {
   try {
     const product = await this.encuentraProductoPorSku(sku);
-    product.descontinuado = false;
-    product.fechaAlta = Date.now();
-
+    if (product.descontinuado) {
+      product.descontinuado = false;
+    }
+    const fechaAlta = new Date(product.fechaAlta);
+    const fechaBaja = new Date(product.fechaBaja);
+    if (fechaBaja > fechaAlta) {
+      product.fechaAlta = Date.now();
+    }
     const updatedProduct = await product.save();
     return updatedProduct;
   } catch (error) {

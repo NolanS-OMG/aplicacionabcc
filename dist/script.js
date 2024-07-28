@@ -72,6 +72,10 @@ const crearBotonCancelar = (texto = "Cancelar") => {
 const skuForm = document.getElementById("skuForm");
 skuForm.addEventListener("submit", async (event) => {
   event.preventDefault();
+
+  const submitButton = skuForm.children[2];
+  submitButton.disabled = true;
+
   const form = event.target;
   const formData = new FormData(form);
   const jsonFormData = Object.fromEntries(formData.entries());
@@ -139,7 +143,9 @@ skuForm.addEventListener("submit", async (event) => {
         dialog.style.display = "flex";
       }
     }
+    submitButton.disabled = false;
   } catch (error) {
+    submitButton.disabled = false;
     console.error('There has been a problem with your fetch operation:', error);
   }
 });
@@ -156,5 +162,8 @@ crearTablaBoton.addEventListener("click", (event) => {
 
 document.addEventListener("DOMContentLoaded", async () => {
   tabla = await obtenerTabla();
-  console.log("Tabla: ", tabla);
+  const allButtons = document.getElementsByTagName("button");
+  for (let i = 0; i < allButtons.length; i++) {
+    allButtons[i].disabled = false;
+  }
 });
